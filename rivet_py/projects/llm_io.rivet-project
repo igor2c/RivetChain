@@ -1,0 +1,58 @@
+version: 4
+data:
+  attachedData:
+    trivet:
+      testSuites: []
+      version: 1
+  graphs:
+    6JmgBSqVGTBGWcwC5UOVE:
+      metadata:
+        description: ""
+        id: 6JmgBSqVGTBGWcwC5UOVE
+        name: Main Folder/Main Graph
+      nodes:
+        '[6nPJHJGhQMfky1N4hJgUS]:chat "Chat"':
+          data:
+            cache: false
+            enableFunctionUse: false
+            frequencyPenalty: 0
+            maxTokens: 1024
+            model: gpt-3.5-turbo
+            presencePenalty: 0
+            stop: ""
+            temperature: 0.5
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePresencePenaltyInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          outgoingConnections:
+            - response->"Graph Output" yMbg1AqS5kWGYIfIRTRls/value
+          visualData: 489.90542650016/37.272902647592645/230/83//
+        '[8Yuo1LcZ6ZWyIcXe9ZkQb]:graphInput "Graph Input"':
+          data:
+            dataType: string
+            defaultValue: What is love?
+            id: input
+            useDefaultValueInput: false
+          outgoingConnections:
+            - data->"Chat" 6nPJHJGhQMfky1N4hJgUS/prompt
+          visualData: -65.87191703750983/81.31313908603998/330/78/var(--node-color-1)/var(--grey-darkish)
+        '[yMbg1AqS5kWGYIfIRTRls]:graphOutput "Graph Output"':
+          data:
+            dataType: object
+            id: output
+          visualData: 926.9754537916562/89.68626934197279/330/88/var(--node-color-3)/var(--grey-darkish)
+  metadata:
+    description: ""
+    id: V5oVNJ1qm5BKtAEG2Ct-3
+    title: LLM IO
+  plugins: []

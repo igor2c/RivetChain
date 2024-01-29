@@ -1,0 +1,13 @@
+# https://stackoverflow.com/a/987162
+
+# Ignore everything
+**
+
+# Except these files...
+!.gitignore
+!REAME.md
+!app.py
+
+# Also whitelist the rivet_py folder and its contents
+!/rivet_py
+!/rivet_py/**
