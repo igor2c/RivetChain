@@ -3,7 +3,6 @@ from chainlit.types import ThreadDict
 import json
 from rivet_py.rivet_client import setup_rivet, call_rivet
 
-
 # Ensure the Rivet Node.js server is running
 setup_rivet(rivet_project_filepath=r'.\rivet_py\projects\chat.rivet-project',
             rivet_server_filepath=r'.\rivet_py\rivet_server.js')
@@ -29,27 +28,29 @@ async def on_chat_resume(thread: ThreadDict):
 
 
 @cl.on_message
-async def main(message: cl.Message):
+async def main(user_message: cl.Message):
 
-    response = cl.Message(content="")
+    # Get `message_history` variable from current `user_session`
+    message_history = cl.user_session.get("message_history")  # type : list of lists, example: [["user", "Hello?"], ["assistant", "Hi!"]]
+    if message_history is None:
+        message_history = []
 
-    # Get memory variable from Chainlit thread
-    memory = cl.user_session.get("memory")  # type : list of lists, example: [["user", "Hello?"], ["assistant", "Hi!"]]
-    if memory is None:
-        memory = []
-
-    # Generate response
-    response_dict = call_rivet(inputs={'previous_messages': json.dumps(memory), 'user_message': message.content},
+    # Call Rivet
+    response_dict = call_rivet(inputs={'message_history': json.dumps(message_history),
+                                       'user_message': user_message.content},
                                graph="Main Folder/Main Graph")
-    response.content = response_dict.get('output', {}).get('value', None)
-    if not response.content:
-        response.content = response_dict.get('error', '???')
 
-    # Set new memory variable in Chainlit thread
-    memory.append(["user", message.content])
-    memory.append(["assistant", response.content])
-    cl.user_session.set("memory", memory)
+    # Parse Rivet response
+    content = response_dict.get('output', {}).get('value', None)
+    if content is None:
+        content = response_dict.get('error', 'Unknown error.')
+    assistant_message = cl.Message(content=content)
+
+    # Set new `message_history` variable in current `user_session`
+    message_history.append(["user", user_message.content])
+    message_history.append(["assistant", assistant_message.content])
+    cl.user_session.set("message_history", message_history)
 
     # Send response
-    await response.send()
+    await assistant_message.send()
 

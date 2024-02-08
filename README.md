@@ -31,7 +31,29 @@ npm install @ironclad/rivet-node
 npm install express
 ```
 
-### 4. Create `.env` file
+### 4. Create Conda virtual environment
+
+Create and activate a conda environment:
+
+```
+conda create --name rivetchain_env python=3.11
+```
+
+```
+conda activate rivetchain_env
+```
+
+### 5. Chainlit installation
+
+`chainlit` [requires](https://docs.chainlit.io/get-started/installation) `python>=3.8`.
+
+In conda environment, install `chainlit` via pip as follows:
+
+```
+pip install chainlit
+```
+
+### 6. Create `.env` file
 
 In the root folder of the project, create a `.env` file with the following contents:
 
@@ -44,29 +66,6 @@ CHAINLIT_AUTH_SECRET=
 - OPENAI_API_KEY is generated here: https://platform.openai.com/api-keys
 - LITERAL_API_KEY is generated following this: https://docs.chainlit.io/data-persistence/overview
 - CHAINLIT_AUTH_SECRET is generate using `chainlit create-secret`
-
-
-### 5. Create Conda virtual environment
-
-Create and activate a conda environment:
-
-```
-conda create --name rivetchain_env python=3.11
-```
-
-```
-conda activate rivetchain_env
-```
-
-### 6. Chainlit installation
-
-`chainlit` [requires](https://docs.chainlit.io/get-started/installation) `python>=3.8`.
-
-In conda environment, install `chainlit` via pip as follows:
-
-```
-pip install chainlit
-```
 
 ### 7. Run RivetChain
 
@@ -85,7 +84,7 @@ The -w flag tells Chainlit to enable auto-reloading, so you don’t need to rest
 ## 🔧 Future updates
 
 - **RivetChain:** `cd` to root folder of the project, `git pull origin master`
-- **Rivet:** `cd` to root folder of the project (where `package.json` is located) and `npm update`
+- **Rivet:** `cd` to root folder of the project (where `package.json` is located) and `npm update @ironclad/rivet-node`
 - **Chainlit:** In conda environment, `pip install chainlit --upgrade --upgrade-strategy only-if-needed` ([font](https://stackoverflow.com/a/10440459))
 
 ## ⚙️ Customization

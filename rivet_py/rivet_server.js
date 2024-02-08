@@ -20,7 +20,7 @@ let project;
 loadProjectFromFile(projectFilePath)
     .then(loadedProject => {
         project = loadedProject;
-        console.log('Rivet project loaded successfully');
+        console.log('Rivet project loaded successfully: ' + projectFilePath);
     })
     .catch(error => {
         console.error('\x1b[91mFailed to load Rivet project:\x1b[0m', error);

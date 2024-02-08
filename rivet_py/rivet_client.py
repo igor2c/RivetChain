@@ -86,7 +86,7 @@ def setup_rivet(rivet_project_filepath: str = r'.\projects\llm_io.rivet-project'
         port (int): The port number on which the server will listen (default is 3000).
 
     Returns:
-        None: This function ensures th server is running but does not return a value.
+        None: This function ensures the server is running but does not return a value.
     """
 
     # Set up temporary environment variables
@@ -114,9 +114,8 @@ def call_rivet(inputs: dict = {'input': '3+3'},
         graph (str): The name of the graph to be executed in Rivet ('Folder Name/Graph Name').
 
     Returns:
-        A dict with the cost and the outputs from the Rivet graph, where the keys are the Graph Output nodes' IDs,
-        and where Split (parallel or sequential) values are in lists;
-        or a dict with an error encountered.
+        dict: A dict with the cost and the outputs from the Rivet graph, where the keys are the Graph Output nodes' IDs,
+        and where Split (parallel or sequential) values are in lists; or a dict with an error encountered.
 
         Example 1:
         {'male_scientist': {'type': 'string', 'value': 'He is Albert Einstein'},
