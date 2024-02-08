@@ -119,7 +119,7 @@ def call_rivet(inputs: dict = {'input': '3+3'},
 
         Example 1:
         {'male_scientist': {'type': 'string', 'value': 'He is Albert Einstein'},
-        'dates': {'type': 'number[]', 'value': [1920, 1930, 1940]},
+        'years': {'type': 'number[]', 'value': [1920, 1930, 1940]},
         'cost': {'type': 'number', 'value': 0.000156}}
 
         Example 2:

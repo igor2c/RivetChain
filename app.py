@@ -47,8 +47,8 @@ async def main(user_message: cl.Message):
     assistant_message = cl.Message(content=content)
 
     # Set new `message_history` variable in current `user_session`
-    message_history.append(["user", user_message.content])
-    message_history.append(["assistant", assistant_message.content])
+    message_history.append({"type": "user", "message": user_message.content})
+    message_history.append({"type": "assistant", "message": assistant_message.content})
     cl.user_session.set("message_history", message_history)
 
     # Send response

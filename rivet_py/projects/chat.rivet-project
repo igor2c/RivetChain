@@ -14,7 +14,7 @@ data:
         '[11ZJuOinkZxp98tz_gO_F]:assemblePrompt "Assemble Prompt"':
           outgoingConnections:
             - prompt->"Chat" 6nPJHJGhQMfky1N4hJgUS/prompt
-          visualData: -343.5811905209286/48.29816068438247/280/223//
+          visualData: -365.9976368534545/63.89221612635608/280/255//
         '[6nPJHJGhQMfky1N4hJgUS]:chat "Chat"':
           data:
             cache: false
@@ -50,41 +50,31 @@ data:
             useDefaultValueInput: true
           outgoingConnections:
             - data->"Assemble Prompt" 11ZJuOinkZxp98tz_gO_F/message2
-          visualData: -745.8642740117552/165.84188600069103/330/226/var(--node-color-1)/var(--grey-darkish)
-        '[8dY27PpVFlqoz25Wni4Mk]:subGraph "Classify User and Assistant (Subgraph)"':
-          data:
-            graphId: rX6gU9tQmssT_mRNNrD63
-            useAsGraphPartialOutput: false
-            useErrorOutput: false
-          isSplitRun: true
-          outgoingConnections:
-            - message->"Assemble Prompt" 11ZJuOinkZxp98tz_gO_F/message1
-          splitRunMax: 999999
-          visualData: -754.8407671286814/-51.61450511713078/355.52667972078416/218/var(--node-color-4)/var(--grey-darkish)
+          visualData: -1124.0205088608045/184.35978501147872/330/253/var(--node-color-1)/var(--grey-darkish)
         '[NYYrmaROLENPXxQiBWVOl]:text "Default (Text)"':
           data:
             text: What is the value of x tripled?
           outgoingConnections:
             - output->"User input (Graph Input)" 8Yuo1LcZ6ZWyIcXe9ZkQb/default
-          visualData: -1118.8601070426737/204.20192433850934/330/231//
+          visualData: -1550.621032953175/205.17649424645435/330/250//
         '[P1ukE6PHGZkmEXh9TCp8O]:text "Default (Text)"':
           data:
             text: "[\r
 
-              \  [\"user\", \"x = 10\"],\r
+              \  {\"type\": \"user\", \"message\": \"x = 10\"},\r
 
-              \  [\"assistant\", \"Okay, x is now 10.\"]\r
+              \  {\"type\": \"assistant\", \"message\": \"Okay, x
+              is now 10.\"}\r
 
               ]"
           outgoingConnections:
             - output->"Message history (Graph Input)"
               r2vCAInbzLh8RB-CoYJ5W/default
-          visualData: -1843.008165401001/-43.58572878057776/330/232//
+          visualData: -1559.3910115717106/-95.24110156616786/330/244//
         '[Rw8B7p5tK4_U1uUNVvGvE]:extractJson "Extract JSON"':
           outgoingConnections:
-            - output->"Classify User and Assistant (Subgraph)"
-              8dY27PpVFlqoz25Wni4Mk/2-tuple
-          visualData: -1079.388743125399/-51.49250090562606/280/188//
+            - output->"Assemble Prompt" 11ZJuOinkZxp98tz_gO_F/message1
+          visualData: -709.0295136898401/-63.188053640854534/280/236//
         '[lfzMVWxTOPR-QQR98v3vE]:graphOutput "Graph Output"':
           data:
             dataType: string
@@ -98,74 +88,7 @@ data:
             useDefaultValueInput: true
           outgoingConnections:
             - data->"Extract JSON" Rw8B7p5tK4_U1uUNVvGvE/input
-          visualData: -1434.074629285046/-55.04790054984543/272.0742791248231/215/var(--node-color-1)/var(--grey-darkish)
-    rX6gU9tQmssT_mRNNrD63:
-      metadata:
-        description: ""
-        id: rX6gU9tQmssT_mRNNrD63
-        name: Main Folder/Classify User and Assistant
-      nodes:
-        '[-KrqrSqyTO7jKp5fr76ht]:raceInputs "Race Inputs"':
-          outgoingConnections:
-            - result->"Graph Output" ZBHoQVFP9gb1oj1eayPJ4/value
-          visualData: 1453.783933667731/451.3430591060379/330/151//
-        '[8dbePxi4Xw6obE2tJuAVY]:pop "Pop"':
-          data:
-            fromFront: true
-          outgoingConnections:
-            - lastItem->"Compare" p-5hr6fmEDj5z6f8C58sd/a
-            - restOfArray->"If" BbMMKlRQP0WiOdxXmhnMG/value
-          visualData: 212.67148047035246/298.66592224802395/230/115//
-        '[B-uXOAaCLct43BmxwXD2j]:assembleMessage "Assemble Message"':
-          data:
-            toolCallId: ""
-            type: assistant
-            useToolCallIdInput: false
-            useTypeInput: false
-          outgoingConnections:
-            - message->"Race Inputs" -KrqrSqyTO7jKp5fr76ht/input2
-          visualData: 1067.4099569087805/573.2233709058833/280/147//
-        '[BbMMKlRQP0WiOdxXmhnMG]:if "If"':
-          data:
-            unconnectedControlFlowExcluded: true
-          outgoingConnections:
-            - falseOutput->"Assemble Message" B-uXOAaCLct43BmxwXD2j/part1
-            - output->"Assemble Message" RoA5aZdOe_MB63h6GDilB/part1
-          visualData: 799.8720728683222/434.3652979416788/155/143//
-        '[RoA5aZdOe_MB63h6GDilB]:assembleMessage "Assemble Message"':
-          data:
-            toolCallId: ""
-            type: user
-            useToolCallIdInput: false
-            useTypeInput: false
-          outgoingConnections:
-            - message->"Race Inputs" -KrqrSqyTO7jKp5fr76ht/input1
-          visualData: 1071.0314202659627/321.9404811667245/280/145//
-        '[ZBHoQVFP9gb1oj1eayPJ4]:graphOutput "Graph Output"':
-          data:
-            dataType: chat-message
-            id: message
-          visualData: 1850.870898391546/452.8394755728658/330/153/var(--node-color-3)/var(--grey-darkish)
-        '[kTnCstz6gPs7v9qS1OYUp]:graphInput "Graph Input"':
-          data:
-            dataType: string[]
-            id: 2-tuple
-            useDefaultValueInput: false
-          outgoingConnections:
-            - data->"Pop" 8dbePxi4Xw6obE2tJuAVY/array
-          visualData: -258.2467669576579/445.03471834648934/330/111/var(--node-color-1)/var(--grey-darkish)
-        '[p-5hr6fmEDj5z6f8C58sd]:compare "Compare"':
-          data:
-            comparisonFunction: ==
-          outgoingConnections:
-            - output->"If" BbMMKlRQP0WiOdxXmhnMG/if
-          visualData: 542.0009459004916/298.0972056656505/190/142//
-        '[t0l8RQHGkeOFusjwJWuH7]:text "Text"':
-          data:
-            text: user
-          outgoingConnections:
-            - output->"Compare" p-5hr6fmEDj5z6f8C58sd/b
-          visualData: 240.09920606209894/529.3873379147883/140.77537745721634/133//
+          visualData: -1143.6349507202242/-91.10912866347583/377.2599746170563/246/var(--node-color-1)/var(--grey-darkish)
   metadata:
     description: ""
     id: V5oVNJ1qm5BKtAEG2Ct-3
